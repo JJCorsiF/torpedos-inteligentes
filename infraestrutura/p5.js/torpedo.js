@@ -1,4 +1,12 @@
-class Torpedo { // implements Individuo
+import {createVector, dist} from './bibliotecas/p5/p5.js';
+import * as DNA from './dna.js';
+
+let rx = 100,
+	ry = 150,
+	rw = 200,
+	rh = 10;
+
+export default class Torpedo { // implements Individuo
 	constructor(dna) {
 		this.posicao = createVector(width / 2, height);
 		this.velocidade = createVector();

@@ -1,4 +1,6 @@
-class Populacao {
+import * as Torpedo from './torpedo.js';
+
+export default class Populacao {
 	constructor(tamanho) {
 		this.individuos = [];
 		this.tamanho = isNaN(tamanho) ? 25 : tamanho;

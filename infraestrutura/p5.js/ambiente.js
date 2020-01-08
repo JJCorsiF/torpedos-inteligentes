@@ -1,3 +1,6 @@
+import {background, createCanvas, createP, createVector, ellipse, rect} from './bibliotecas/p5/p5.js';
+import * as Populacao from './populacao.js';
+
 let contador = 0;
 let torpedo;
 let populacao;
@@ -6,11 +9,10 @@ let paragrafo;
 let alvo;
 let forcaMaxima = 0.2;
 
-let rx = 100, ry = 150, rw = 200, rh = 10;
+//let rx = 100, ry = 150, rw = 200, rh = 10;
 
 function setup() {
 	createCanvas(400, 300);
-	//torpedo = new Torpedo();
 	populacao = new Populacao();
 	paragrafo = createP();
 	alvo = createVector(width / 2, 50);

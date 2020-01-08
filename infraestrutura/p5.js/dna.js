@@ -1,4 +1,6 @@
-class DNA {
+import * as p5 from './bibliotecas/p5/p5.js';
+
+export default class DNA {
 	constructor(genes) {
 		this.genes = [];
 
