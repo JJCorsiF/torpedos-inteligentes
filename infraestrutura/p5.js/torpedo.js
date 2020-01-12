@@ -1,16 +1,20 @@
-import {createVector, dist} from './bibliotecas/p5/p5.js';
-import * as DNA from './dna.js';
+//import * as p5 from './bibliotecas/p5/p5.min.js';
+import {P5} from './p5instance.js';
+import {DNA} from './dna.js';
+
+let lifespan = 400;
 
 let rx = 100,
 	ry = 150,
 	rw = 200,
 	rh = 10;
 
-export default class Torpedo { // implements Individuo
+class Torpedo { // implements Individuo
 	constructor(dna) {
-		this.posicao = createVector(width / 2, height);
-		this.velocidade = createVector();
-		this.aceleracao = createVector();
+		this.alvo = P5.createVector(P5.width / 2, 50);
+		this.posicao = P5.createVector(P5.width / 2, P5.height);
+		this.velocidade = P5.createVector();
+		this.aceleracao = P5.createVector();
 		this.completou = false;
 		this.explodiu = false;
 		
@@ -28,11 +32,11 @@ export default class Torpedo { // implements Individuo
 	}
 
 	atualizar() {
-		let distancia = dist(this.posicao.x, this.posicao.y, alvo.x, alvo.y);
+		let distancia = P5.dist(this.posicao.x, this.posicao.y, this.alvo.x, this.alvo.y);
 		
 		if (distancia < 10) {
 			this.completou = true;
-			this.posicao = alvo.copy();
+			this.posicao = this.alvo.copy();
 		}
 		
 		if (
@@ -45,15 +49,15 @@ export default class Torpedo { // implements Individuo
 		}
 		
 		if (
-			this.posicao.x > width ||
+			this.posicao.x > P5.width ||
 			this.posicao.x < 0 ||
-			this.posicao.y > height ||
+			this.posicao.y > P5.height ||
 			this.posicao.y < 0
 		) {
 			this.explodiu = true;
 		}
 		
-		this.aplicarForca(this.dna.pegarGeneDaPosicao(contador));
+		this.aplicarForca(this.dna.pegarGeneDaPosicao(P5.frameCount % lifespan));
 		
 		if ( ! this.completou && ! this.explodiu) {
 			this.velocidade.add(this.aceleracao);
@@ -64,20 +68,20 @@ export default class Torpedo { // implements Individuo
 	}
 
 	mostrar() {
-		push();
-		noStroke();
-		fill(255, 150);
-		translate(this.posicao.x, this.posicao.y);
-		rotate(this.velocidade.heading());
-		rectMode(CENTER);
-		rect(0, 0, 25, 5);
-		pop();
+		P5.push();
+		P5.noStroke();
+		P5.fill(255, 150);
+		P5.translate(this.posicao.x, this.posicao.y);
+		P5.rotate(this.velocidade.heading());
+		P5.rectMode(P5.CENTER);
+		P5.rect(0, 0, 25, 5);
+		P5.pop();
 	}
 
 	calcularAptidao() {
-		let distancia = dist(this.posicao.x, this.posicao.y, alvo.x, alvo.y);
+		let distancia = P5.dist(this.posicao.x, this.posicao.y, this.alvo.x, this.alvo.y);
 
-		this.aptidao = map(distancia, 0, width, width, 0); // 1 / distancia;
+		this.aptidao = P5.map(distancia, 0, P5.width, P5.width, 0); // 1 / distancia;
 		
 		if (this.completou) {
 			this.aptidao *= 10;
@@ -88,3 +92,5 @@ export default class Torpedo { // implements Individuo
 		}
 	}
 }
+
+export {Torpedo};

@@ -1,6 +1,8 @@
-import * as Torpedo from './torpedo.js';
+//import * as p5 from './bibliotecas/p5/p5.min.js';
+import {P5} from './p5instance.js';
+import {Torpedo} from './torpedo.js';
 
-export default class Populacao {
+class Populacao {
 	constructor(tamanho) {
 		this.individuos = [];
 		this.tamanho = isNaN(tamanho) ? 25 : tamanho;
@@ -56,16 +58,16 @@ export default class Populacao {
 
 	selecionar() {
 		let novosIndividuos = [];
-		
+
 		for (let t = 0; t < this.individuos.length; t++) {
-			let paiAleatorio = random(this.candidatosACruzamento);
+			let paiAleatorio = P5.random(this.candidatosACruzamento);
 
 			if (paiAleatorio === 'undefined') {
 				console.log('Não foi possível encontrar um par para crossover');
 				return false;
 			}
 
-			let maeAleatoria = random(this.candidatosACruzamento);
+			let maeAleatoria = P5.random(this.candidatosACruzamento);
 
 			if (maeAleatoria === 'undefined') {
 				console.log('Não foi possível encontrar um par para crossover');
@@ -74,14 +76,16 @@ export default class Populacao {
 
 			let dnaDoPai = paiAleatorio.dna;
 			let dnaDaMae = maeAleatoria.dna;
-			
+
 			let dnaDoFilho = dnaDoPai.crossover(dnaDaMae);
-			
+
 			dnaDoFilho.sofrerMutacao();
-			
+
 			novosIndividuos[t] = this.criarNovoIndividuo(dnaDoFilho);
 		}
 
 		this.individuos = novosIndividuos;
 	}
-}
+};
+
+export {Populacao};
