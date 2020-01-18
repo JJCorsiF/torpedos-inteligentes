@@ -2,7 +2,6 @@ import {Populacao} from './populacao.js';
 
 const s = (p) => {
 	let contador = 0;
-	let torpedo;
 	let populacao;
 	let lifespan = 400;
 	let paragrafo;
