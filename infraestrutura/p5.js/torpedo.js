@@ -91,6 +91,14 @@ class Torpedo { // implements Individuo
 			this.aptidao /= 10;
 		}
 	}
+
+	atribuirAptidao(aptidao) {
+		this.aptidao = aptidao;
+	}
+
+	pegarAptidao() {
+		return this.aptidao;
+	}
 }
 
 export {Torpedo};

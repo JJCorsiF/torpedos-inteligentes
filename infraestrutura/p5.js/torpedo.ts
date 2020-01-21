@@ -1,5 +1,5 @@
 //import * as p5 from './bibliotecas/p5/p5.min.js';
-import { P5 } from './p5instance.js';
+import { P5 } from './p5instance';
 import { DNA } from './dna';
 
 let lifespan = 400;
@@ -18,7 +18,7 @@ class Torpedo { // implements Individuo
 	private explodiu : boolean;
 	private aptidao : number;
 	
-	constructor(private dna : DNA) {
+	constructor(private dna ?: DNA) {
 		this.alvo = P5.createVector(P5.width / 2, 50);
 		this.posicao = P5.createVector(P5.width / 2, P5.height);
 		this.velocidade = P5.createVector();
@@ -99,6 +99,14 @@ class Torpedo { // implements Individuo
 			this.aptidao /= 10;
 		}
 	}
+	
+	atribuirAptidao(aptidao : number) : void {
+		this.aptidao = aptidao;
+	}
+
+	pegarAptidao(): number {
+		return this.aptidao;
+	}
 }
 
-export { Torpedo };
+export { Torpedo, DNA };

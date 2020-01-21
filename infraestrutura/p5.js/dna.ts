@@ -1,5 +1,5 @@
 //import * as p5 from './bibliotecas/p5/p5.min.js';
-import { P5 } from './p5instance.js';
+import { P5 } from './p5instance';
 
 let lifespan = 400;
 let forcaMaxima = 0.2;
